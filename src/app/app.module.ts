@@ -1,3 +1,4 @@
+import 'hammerjs';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { CoreModule, DataModule, GUIModule } from './modules';

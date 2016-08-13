@@ -71,7 +71,7 @@ export default extendBaseWebpackConfig({
     ]),
     new HtmlWebpackPlugin({
       template: path.join(process.cwd(), SRC_DIR, 'app/index.html'),
-      chunksSortMode: packageSort(['polyfills', 'vendor', 'main']),
+      chunksSortMode: packageSort(['polyfills', 'main']),
       minify: {
         removeComments: true,
         collapseWhitespace: true,

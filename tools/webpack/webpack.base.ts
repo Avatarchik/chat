@@ -15,7 +15,6 @@ export default options => ({
 
   entry: {
     polyfills: path.join(process.cwd(), SRC_DIR, 'app/polyfills.ts'),
-    vendor: path.join(process.cwd(), SRC_DIR, 'app/vendor.ts'),
     app: path.join(process.cwd(), SRC_DIR, 'app/bootstrap.ts')
   },
 
@@ -99,7 +98,6 @@ export default options => ({
     }),
     new CommonsChunkPlugin({
       name: 'app',
-      children: true,
       async: true,
       minChunks: 3
     }),
@@ -107,18 +105,6 @@ export default options => ({
   ],
 
   postcss: () => options.postcssPlugins,
-  cache: true,
   devtool: options.devtool,
-  devServer: options.devServer,
-  node: {
-    global: 'window',
-    process: true,
-    Buffer: false,
-    crypto: 'empty',
-    module: false,
-    clearImmediate: false,
-    setImmediate: false,
-    clearTimeout: true,
-    setTimeout: true
-  }
+  devServer: options.devServer
 });
