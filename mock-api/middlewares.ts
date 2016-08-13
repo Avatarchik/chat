@@ -12,9 +12,10 @@ export function timestampMiddleware(req, res, next) {
 
 export function authMiddleware(req, res, next) {
   console.log('auth');
-  if (true) {
-    next();
-  } else {
-    res.sendStatus(401);
-  }
+  // if (true) {
+  //   next();
+  // } else {
+  //   res.sendStatus(401);
+  // }
+  next();
 }

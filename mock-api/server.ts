@@ -1,4 +1,4 @@
-import jsonServer from 'json-server';
+import * as jsonServer from 'json-server';
 import generateDb  from './db';
 import { timestampMiddleware, authMiddleware } from './middlewares';
 

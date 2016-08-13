@@ -1,11 +1,15 @@
-import path from 'path';
+import * as path from 'path';
 import { HTML_METADATA, SRC_DIR, DIST_DIR, IS_PROD, IS_DEV } from '../config';
 
 // Webpack plugins
-import DefinePlugin from 'webpack/lib/DefinePlugin';
-import CommonsChunkPlugin from 'webpack/lib/optimize/CommonsChunkPlugin';
-const ForkCheckerPlugin = require('awesome-typescript-loader').ForkCheckerPlugin;
-import ProgressPlugin from 'webpack/lib/ProgressPlugin';
+const { ForkCheckerPlugin } = require('awesome-typescript-loader');
+const {
+  DefinePlugin,
+  ProgressPlugin,
+  optimize: {
+    CommonsChunkPlugin
+  }
+} = require('webpack');
 
 export default options => ({
 
@@ -50,7 +54,7 @@ export default options => ({
         loader: 'awesome-typescript',
         include: path.join(process.cwd(), SRC_DIR)
       },
-      { test: /\.json$/, loader: 'json' },
+      {test: /\.json$/, loader: 'json'},
       {
         test: /\.scss$/,
         loader: options.globalCssLoaders,

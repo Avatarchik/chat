@@ -1,18 +1,30 @@
-import path from 'path';
+import * as path from 'path';
 import { SRC_DIR, packageSort } from '../config';
 import extendBaseWebpackConfig from './webpack.base';
 
 // Webpack plugins
-import DedupePlugin from 'webpack/lib/optimize/DedupePlugin';
-import UglifyJsPlugin from 'webpack/lib/optimize/UglifyJsPlugin';
-import ExtractTextPlugin from 'extract-text-webpack-plugin';
-import CopyWebpackPlugin from 'copy-webpack-plugin';
-import HtmlWebpackPlugin from 'html-webpack-plugin';
+const {
+  optimize: {
+    DedupePlugin,
+    UglifyJsPlugin
+  }
+} = require('webpack');
+import * as ExtractTextPlugin from 'extract-text-webpack-plugin';
+import * as CopyWebpackPlugin from 'copy-webpack-plugin';
+import * as HtmlWebpackPlugin from 'html-webpack-plugin';
+
+const {
+  DefinePlugin,
+  ProgressPlugin,
+  optimize: {
+    CommonsChunkPlugin
+  }
+} = require('webpack');
 
 // PostCSS plugins
-import autoprefixer from 'autoprefixer';
-import assets from 'postcss-assets';
-import cssnano from 'cssnano';
+import * as autoprefixer from 'autoprefixer';
+import * as assets from 'postcss-assets';
+import * as cssnano from 'cssnano';
 
 export default extendBaseWebpackConfig({
 

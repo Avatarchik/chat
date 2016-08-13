@@ -1,14 +1,14 @@
-import path from 'path';
+import * as path from 'path';
 import { SRC_DIR, DIST_DIR, HOST, PORT, packageSort } from '../config';
 import extendBaseWebpackConfig from './webpack.base';
 
 // Webpack plugins
-import NoErrorsPlugin from 'webpack/lib/NoErrorsPlugin';
-import HtmlWebpackPlugin from 'html-webpack-plugin';
+const { NoErrorsPlugin } = require('webpack');
+import * as HtmlWebpackPlugin from 'html-webpack-plugin';
 
 // PostCSS plugins
-import autoprefixer from 'autoprefixer';
-import assets from 'postcss-assets';
+import * as autoprefixer from 'autoprefixer';
+import * as assets from 'postcss-assets';
 
 export default extendBaseWebpackConfig({
 
