@@ -55,7 +55,6 @@ export default extendBaseWebpackConfig({
     host: HOST,
     port: PORT,
     historyApiFallback: true,
-    stats: 'errors-only',
     outputPath: path.join(process.cwd(), DIST_DIR)
   },
 

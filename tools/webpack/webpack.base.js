@@ -4,6 +4,8 @@ import { HTML_METADATA, SRC_DIR, DIST_DIR, IS_PROD, IS_DEV } from '../config';
 // Webpack plugins
 import DefinePlugin from 'webpack/lib/DefinePlugin';
 import CommonsChunkPlugin from 'webpack/lib/optimize/CommonsChunkPlugin';
+const ForkCheckerPlugin = require('awesome-typescript-loader').ForkCheckerPlugin;
+import ProgressPlugin from 'webpack/lib/ProgressPlugin';
 
 export default options => ({
 
@@ -45,9 +47,10 @@ export default options => ({
     loaders: [
       {
         test: /\.ts$/,
-        loader: 'ts',
-        include: path.join(process.cwd(), SRC_DIR, 'app')
+        loader: 'awesome-typescript',
+        include: path.join(process.cwd(), SRC_DIR)
       },
+      { test: /\.json$/, loader: 'json' },
       {
         test: /\.scss$/,
         loader: options.globalCssLoaders,
@@ -84,6 +87,8 @@ export default options => ({
   },
 
   plugins: [
+    new ProgressPlugin({}),
+    new ForkCheckerPlugin(),
     new DefinePlugin({
       IS_PROD,
       IS_DEV
@@ -98,6 +103,18 @@ export default options => ({
   ],
 
   postcss: () => options.postcssPlugins,
+  cache: true,
   devtool: options.devtool,
-  devServer: options.devServer
+  devServer: options.devServer,
+  node: {
+    global: 'window',
+    process: true,
+    Buffer: false,
+    crypto: 'empty',
+    module: false,
+    clearImmediate: false,
+    setImmediate: false,
+    clearTimeout: true,
+    setTimeout: true
+  }
 });
