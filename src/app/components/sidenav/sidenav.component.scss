@@ -1,0 +1,77 @@
+@import "../../../styles/shared";
+
+:host {
+  display: block;
+}
+
+.sidenav {
+  width: 300px;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  z-index: 1031;
+  left: -300px;
+  background: #fff;
+  padding: 8px 0;
+  overflow-y: auto;
+
+  .list {
+    margin: 0;
+    padding: 0;
+  }
+
+  .list-item.brand {
+    padding-bottom: 8px;
+    font-size: 22px;
+  }
+
+  .logo {
+    max-width: 50px;
+    margin-right: 5px;
+  }
+
+  .list-item {
+    padding: 0 16px;
+    display: block;
+    line-height: 48px;
+    font-size: 16px;
+    color: #373a3c;
+    text-decoration: none;
+
+    &:not(.brand):hover {
+      cursor: pointer;
+      background-color: #f5f5f5;
+    }
+
+    &.active {
+      color: $navbar-bg-color;
+      font-weight: bold;
+      background-color: #f5f5f5;
+    }
+
+    .fa {
+      font-size: 30px;
+      vertical-align: middle;
+    }
+
+    .fa-home,
+    .fa-question-circle,
+    .fa-cog {
+      padding-bottom: 5px;
+    }
+
+    .fa-exclamation {
+      padding-bottom: 3px;
+    }
+  }
+
+  .divider {
+    height: 1px;
+    margin: 7px 0;
+    overflow: hidden;
+    border-top: 1px solid rgba(0, 0, 0, 0.12);
+  }
+}
+
+
+

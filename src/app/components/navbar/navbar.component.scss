@@ -6,7 +6,7 @@
 
 .navbar {
   background-color: $navbar-bg-color;
-  position: static;
+  padding: 15px 16px;
 }
 
 .bg-inverse .nav-item {
@@ -18,13 +18,18 @@
   }
 }
 
-.navbar-toggler {
-  color: #fff;
-}
-
 .nav-item {
   @media (max-width: map-get($grid-breakpoints, sm)) {
     float: none;
     margin: 0 !important;
   }
+
+  a {
+    color: #fff;
+
+    &.brand {
+      text-decoration: none;
+    }
+  }
 }
+

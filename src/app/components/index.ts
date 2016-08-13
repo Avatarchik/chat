@@ -1,15 +1,18 @@
-import { HeaderComponents } from './header/header.component';
-import { FooterComponent } from './footer/footer.component';
+import { NavbarComponent } from './navbar/navbar.component';
+import { SideNavLayoutComponent } from './sidenav/sidenav-layout.component';
+import { SideNavComponent } from './sidenav/sidenav.component';
 // $1
 
 export {
-  HeaderComponents,
-  FooterComponent,
+  NavbarComponent,
+  SideNavLayoutComponent,
+  SideNavComponent,
   // $2
 }
 
 export const components = [
-  HeaderComponents,
-  FooterComponent,
+  NavbarComponent,
+  SideNavLayoutComponent,
+  SideNavComponent,
   // $3
 ];
