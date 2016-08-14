@@ -15,7 +15,7 @@ import { SideNavLayoutComponent } from '../sidenav/sidenav-layout.component';
       </ul>
     </nav>
   `,
-  styles: [require('./navbar.component.scss')]
+  styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent {
   @Input() sidenav: SideNavLayoutComponent;

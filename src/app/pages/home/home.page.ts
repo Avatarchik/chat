@@ -8,7 +8,7 @@ import { Component } from '@angular/core';
     
     <div *ngIf="true">asd</div>
   `,
-  styles: [require('./home.page.scss')]
+  styleUrls: ['./home.page.scss']
 })
 export class HomePage {
 }

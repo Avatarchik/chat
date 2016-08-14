@@ -34,7 +34,7 @@ import { Component } from '@angular/core';
       </div>
     </div>
   `,
-  styles: [require('./sidenav.component.scss')]
+  styleUrls: ['./sidenav.component.scss']
 })
 export class SideNavComponent {
   activeCls = 'active';

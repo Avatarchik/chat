@@ -27,7 +27,7 @@ export default options => ({
   }, options.output),
 
   resolve: {
-    extensions: ['', '.ts', '.js', '.json']
+    extensions: ['', '.ts', '.js', '.json', '.html', '.scss']
   },
 
   module: {
@@ -50,7 +50,7 @@ export default options => ({
     loaders: [
       {
         test: /\.ts$/,
-        loader: 'awesome-typescript',
+        loaders: ['awesome-typescript', 'angular2-template'],
         include: path.join(process.cwd(), SRC_DIR)
       },
       {test: /\.json$/, loader: 'json'},
@@ -86,7 +86,8 @@ export default options => ({
         loader: 'raw',
         exclude: [path.join(process.cwd(), SRC_DIR, 'app/index.html'), /node_modules/]
       }
-    ]
+    ],
+    noParse: [/.+zone\.js\/dist\/.+/, /.+angular2\/bundles\/.+/, /angular2-polyfills\.js/]
   },
 
   plugins: [

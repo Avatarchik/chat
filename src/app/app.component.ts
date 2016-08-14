@@ -21,7 +21,7 @@ import '../styles/main.scss';
 
     <ngrx-store-log-monitor *ngIf="IS_DEV" toggleCommand="ctrl-t"></ngrx-store-log-monitor>
   `,
-  styles: [require('./app.component.scss')]
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
   IS_DEV = IS_DEV;

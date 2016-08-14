@@ -29,7 +29,7 @@ import { Router, NavigationEnd } from '@angular/router';
       </div>
     </div>
   `,
-  styles: [require('./sidenav-layout.component.scss')]
+  styleUrls: ['./sidenav-layout.component.scss']
 })
 export class SideNavLayoutComponent implements OnInit, OnDestroy {
   private router: Router;
