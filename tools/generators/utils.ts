@@ -24,10 +24,23 @@ export function serviceExists(service) {
     .some(fileName => fileName.indexOf(service.toLowerCase()) >= 0);
 }
 
-export function pageExists(page) {
-  return fs
-      .readdirSync('src/app/pages')
-      .indexOf(page.toLowerCase()) >= 0;
+export function pageExists(entity) {
+  const modules = fs
+    .readdirSync('src/app/modules')
+    .filter(f => f !== 'index.ts' && f.endsWith('-page.module.ts'))
+    .map(f => f.slice(0, -15));
+
+  const pages = fs
+    .readdirSync('src/app/pages')
+    .filter(f => f !== 'index.ts');
+
+  const routes = fs
+    .readdirSync('src/app/routes')
+    .map(f => f.slice(0, -15))
+    .filter(f => f !== 'index.ts');
+
+  return [...modules, ...pages, ...routes]
+    .some(fileName => fileName.indexOf(entity.toLowerCase()) >= 0);
 }
 
 export function entityExists(entity) {

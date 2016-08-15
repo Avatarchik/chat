@@ -37,10 +37,10 @@ export default {
       type: 'input',
       name: 'path',
       message: 'Enter the path of the route.',
-      default: '/about',
+      default: 'about',
       validate(path) {
         return path.trim().length
-          ? true
+          ? ('/about'.startsWith('/') ? 'path cannot start with /' : true)
           : 'path is required';
       }
     }

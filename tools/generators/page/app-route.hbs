@@ -3,7 +3,7 @@
   loadChildren(compiler) {
     return System
       .import('./modules/{{ dashCase name }}-page.module')
-      .then(module => compiler.compileModuleAsync(module.{{ properCase name }}Module));
+      .then(module => compiler.compileModuleAsync(module.{{ properCase name }}PageModule));
   }
 },
 $1
