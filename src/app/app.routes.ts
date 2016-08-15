@@ -11,6 +11,7 @@ const routes/*: Routes*/ = [
         .then(module => compiler.compileModuleAsync(module.HomePageModule));
     }
   },
+  // $1
   {
     path: 'asd',
     loadChildren(compiler) {
@@ -24,5 +25,5 @@ const routes/*: Routes*/ = [
 export const appRoutes = RouterModule.forRoot(routes);
 
 export const routeProviders = [
-  { provide: NgModuleFactoryLoader, useClass: WebpackNgModuleLoader }
+  {provide: NgModuleFactoryLoader, useClass: WebpackNgModuleLoader}
 ];

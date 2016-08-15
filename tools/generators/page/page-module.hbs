@@ -1,0 +1,15 @@
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { {{properCase name}}Page } from '../pages';
+import { {{camelCase name}}PageRoutes } from '../routes'
+
+@NgModule({
+  declarations: [{{properCase name}}Page],
+  imports: [
+    CommonModule,
+    {{camelCase name}}PageRoutes
+  ]
+})
+export class {{properCase name}}PageModule {
+}
+

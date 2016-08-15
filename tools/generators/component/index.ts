@@ -52,7 +52,7 @@ export default {
         type: 'modify',
         path: '../../src/app/components/index.ts',
         pattern: /(\/\/ \$[2-3])/gi,
-        template: '{{properCase name}}Component\r\n$1'
+        template: '{{properCase name}}Component,\r\n$1'
       }
     ];
 

@@ -20,7 +20,7 @@ export default {
       type: 'input',
       name: 'selector',
       message: 'What should the selector be?',
-      default: '[nsa-tooltip]',
+      default: '[tooltip]',
       validate(selector) {
         return selector.trim().length
           ? true
@@ -29,11 +29,25 @@ export default {
     }
   ],
   actions(data) {
-    return [{
-      type: 'add',
-      path: '../../src/directives/{{dashCase name}}/{{dashCase name}}.directive.ts',
-      templateFile: './directive/directive.hbs',
-      abortOnFail: true
-    }];
+    return [
+      {
+        type: 'add',
+        path: '../../src/app/directives/{{dashCase name}}.directive.ts',
+        templateFile: './directive/directive.hbs',
+        abortOnFail: true
+      },
+      {
+        type: 'modify',
+        path: '../../src/app/directives/index.ts',
+        pattern: /(\/\/ \$1)/g,
+        template: 'import { {{properCase name}}Directive } from \'./{{dashCase name}}.directive.ts\';\r\n$1'
+      },
+      {
+        type: 'modify',
+        path: '../../src/app/directives/index.ts',
+        pattern: /(\/\/ \$[2-3])/gi,
+        template: '{{properCase name}}Directive,\r\n$1'
+      }
+    ];
   }
 };
