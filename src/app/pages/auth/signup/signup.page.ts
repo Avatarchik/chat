@@ -1,6 +1,7 @@
 /* tslint:disable component-class-suffix */
 import { Component } from '@angular/core';
-import { UserService } from '../../../services';
+import { Store } from '@ngrx/store';
+import { UserSelectors } from '../../../selectors';
 
 @Component({
   selector: 'signup-page',
@@ -10,7 +11,9 @@ import { UserService } from '../../../services';
   styleUrls: ['./signup.page.scss']
 })
 export class SignupPage {
-  constructor(userService: UserService) {
-    console.log(userService.getAsd());
+  constructor(private store: Store<any>, private userSelectors: UserSelectors) {
+    this.store
+      .let(this.userSelectors.getState())
+      .subscribe(val => console.log(val));
   }
 }

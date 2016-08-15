@@ -7,6 +7,6 @@ export {
 };
 
 export const reducers = {
-  users: userReducer,
+  user: userReducer,
 // $3
 };

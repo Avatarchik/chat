@@ -1,6 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FormValidator } from '../../../../utils/validator';
+import { Store } from '@ngrx/store';
+import { UserActions } from '../../../actions';
 
 @Component({
   selector: 'signup-form',
@@ -72,7 +74,9 @@ import { FormValidator } from '../../../../utils/validator';
 export class SignupFormComponent implements OnInit, OnDestroy {
   form: FormGroup;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder,
+              private store: Store<any>,
+              private userActions: UserActions) {
   }
 
   ngOnInit() {
@@ -81,14 +85,19 @@ export class SignupFormComponent implements OnInit, OnDestroy {
 
   createForm() {
     this.form = this.fb.group({
-      email: ['', [Validators.required, FormValidator.mailFormat]],
-      nick: ['', [Validators.required, Validators.minLength(3)]],
-      password: ['', [Validators.required, Validators.minLength(3)]]
+      email: ['attila.egyed.91@gmail.com', [Validators.required, FormValidator.mailFormat]],
+      nick: ['tsm', [Validators.required, Validators.minLength(3)]],
+      password: ['kakas591', [Validators.required, Validators.minLength(3)]]
     })
   }
 
   onSubmit() {
     console.log('onSubmit');
+    this.store.dispatch(this.userActions.signupRequest({
+      email: this.form.controls.email.value,
+      username: this.form.controls.nick.value,
+      password: this.form.controls.password.value
+    }));
   }
 
   ngOnDestroy() {

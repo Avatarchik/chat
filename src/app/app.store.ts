@@ -41,7 +41,7 @@ export const storeProviders = [
    *
    * Source: https://github.com/ngrx/effects/blob/master/lib/run-effects.ts#L8-L20
    */
-  runEffects(effects)
+  runEffects(effects),
 
 ];
 

@@ -1,8 +1,13 @@
 /* tslint:disable member-ordering */
 import { Injectable } from '@angular/core';
-import { Effect, StateUpdates, toPayload } from '@ngrx/effects';
 import { UserActions } from '../actions';
 import { UserService } from '../services';
+import { Effect, StateUpdates, toPayload } from '@ngrx/effects';
+import { Observable } from 'rxjs';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/switchMap';
+import 'rxjs/add/observable/of';
 
 @Injectable()
 export class UserEffects {
@@ -11,8 +16,13 @@ export class UserEffects {
               private userService: UserService) {
   }
 
-  @Effect() someEffect$2 = this.updates$
-    .whenAction('[DummyEffects]')
-    .do(params => console.log(params));
+  @Effect() signup$ = this.updates$
+    .whenAction(UserActions.SIGNUP_REQUEST)
+    .map(toPayload)
+    .switchMap(credentials => {
+      return this.userService.signup(credentials)
+        .map(res => this.userActions.signupSuccess(res))
+        .catch(() => Observable.of(this.userActions.signupError(new Error('error :P'))))
+    });
 }
 
