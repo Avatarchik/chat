@@ -14,9 +14,6 @@ import '../styles/main.scss';
       <div class="main-container container">
         <router-outlet></router-outlet>
       </div>
-      
-      <ngrx-store-log-monitor *ngIf="IS_DEV" toggleCommand="ctrl-t"></ngrx-store-log-monitor>
-      
     </sidenav-layout>
 
     <ngrx-store-log-monitor *ngIf="IS_DEV" toggleCommand="ctrl-t"></ngrx-store-log-monitor>

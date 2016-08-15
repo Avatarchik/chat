@@ -10,4 +10,9 @@ export class UserEffects {
               private userActions: UserActions,
               private userService: UserService) {
   }
+
+  @Effect() someEffect$2 = this.updates$
+    .whenAction('[DummyEffects]')
+    .do(params => console.log(params));
 }
+
