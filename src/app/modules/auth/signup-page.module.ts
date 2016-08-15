@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CoreModule, GUIModule } from '../';
 import { SignupPage } from '../../pages';
 import { signupPageRoutes } from '../../routes'
 import { SignupFormComponent } from '../../components'
@@ -10,7 +10,8 @@ import { SignupFormComponent } from '../../components'
     SignupFormComponent
   ],
   imports: [
-    CommonModule,
+    CoreModule,
+    GUIModule,
     signupPageRoutes
   ]
 })

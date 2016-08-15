@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CoreModule } from '../';
 import { ForgotPasswordPage } from '../../pages';
 import { forgotPasswordPageRoutes } from '../../routes'
 import { ForgotPasswordFormComponent } from '../../components'
@@ -10,7 +10,7 @@ import { ForgotPasswordFormComponent } from '../../components'
     ForgotPasswordFormComponent
   ],
   imports: [
-    CommonModule,
+    CoreModule,
     forgotPasswordPageRoutes
   ]
 })

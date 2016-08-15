@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'login-form',
@@ -21,16 +22,26 @@ import { Component } from '@angular/core';
         <hr>
         -->
         
-        <form autocomplete="off">
-          <div class="form-group">
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">          
+          <div class="form-group" [ngClass]="{'has-danger': form.controls.nick.dirty && form.controls.nick.invalid}">
             <label class="control-label" for="nick">Nickname</label>
-            <input id="nick" class="form-control" type="text" name="nick">
+            <input formControlName="nick" id="nick" class="form-control" type="text">
+            <div *ngIf="form.controls.nick.dirty && form.controls.nick.invalid">
+              <div *ngIf="form.controls.nick.hasError('required')" class="form-control-feedback">Required field.</div>
+              <div *ngIf="form.controls.nick.hasError('minlength')" class="form-control-feedback">Has to be at least {{form.controls.nick.errors.minlength.requiredLength}} characters long.</div>
+            </div>
           </div>
-          <div class="form-group">
+          
+          <div class="form-group" [ngClass]="{'has-danger': form.controls.password.dirty && form.controls.password.invalid}">
             <label class="control-label" for="password">Password</label>
-            <input id="password" class="form-control" type="password" name="password">
+            <input formControlName="password" id="password" class="form-control" type="password">
+            <div *ngIf="form.controls.password.dirty && form.controls.nick.invalid">
+              <div *ngIf="form.controls.password.hasError('required')" class="form-control-feedback">Required field.</div>
+              <div *ngIf="form.controls.password.hasError('minlength')" class="form-control-feedback">Has to be at least {{form.controls.password.errors.minlength.requiredLength}} characters long.</div>
+            </div>
           </div>
-          <button type="submit" class="btn btn-lg btn-primary btn-block">Login</button>
+          
+          <button type="submit" [disabled]="form.invalid" class="btn btn-lg btn-primary btn-block">Login</button>
         </form>
         
         <hr>
@@ -48,6 +59,28 @@ import { Component } from '@angular/core';
   `,
   styleUrls: ['./login-form.component.scss']
 })
-export class LoginFormComponent {
+export class LoginFormComponent implements OnInit, OnDestroy {
+  form: FormGroup;
 
+  constructor(private fb: FormBuilder) {
+  }
+
+  ngOnInit() {
+    this.createForm();
+  }
+
+  createForm() {
+    this.form = this.fb.group({
+      nick: ['', [Validators.required, Validators.minLength(3)]],
+      password: ['', [Validators.required, Validators.minLength(3)]]
+    })
+  }
+
+  onSubmit() {
+    console.log('onSubmit');
+  }
+
+  ngOnDestroy() {
+    this.form = null;
+  }
 }

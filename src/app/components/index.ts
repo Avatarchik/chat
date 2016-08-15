@@ -28,3 +28,7 @@ export const components = [
   ResetPasswordFormComponent,
 // $3
 ];
+
+export const sharedComponents = [
+];
+

@@ -1,5 +1,5 @@
 import { RouterModule, Routes } from '@angular/router';
-import { ForgotPasswordPage } from '../pages/forgot-password/forgot-password.page';
+import { ForgotPasswordPage } from '../../pages/auth/forgot-password/forgot-password.page';
 
 const routes: Routes = [
   {path: '', component: ForgotPasswordPage}

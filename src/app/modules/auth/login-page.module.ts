@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CoreModule } from '../';
 import { LoginPage } from '../../pages';
 import { loginPageRoutes } from '../../routes'
 import { LoginFormComponent } from '../../components';
@@ -10,7 +10,7 @@ import { LoginFormComponent } from '../../components';
     LoginFormComponent
   ],
   imports: [
-    CommonModule,
+    CoreModule,
     loginPageRoutes
   ]
 })

@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CoreModule } from '../';
 import { ResetPasswordPage } from '../../pages';
 import { resetPasswordPageRoutes } from '../../routes'
 import { ResetPasswordFormComponent } from '../../components'
@@ -10,7 +10,7 @@ import { ResetPasswordFormComponent } from '../../components'
     ResetPasswordFormComponent
   ],
   imports: [
-    CommonModule,
+    CoreModule,
     resetPasswordPageRoutes
   ]
 })
