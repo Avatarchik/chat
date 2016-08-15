@@ -6,7 +6,7 @@ import { Component } from '@angular/core';
     <span>{{ dashCase name }} component</span>
   `,
 {{#if wantCSS}}
-  styles: [require('./{{ dashCase name }}.component.scss')]
+  styleUrls: ['./{{ dashCase name }}.component.scss']
 {{/if}}
 })
 export class {{ properCase name }}Component {

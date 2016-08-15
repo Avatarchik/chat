@@ -2,7 +2,7 @@ import * as fs from 'fs';
 
 export function componentExists(component) {
   return fs
-      .readdirSync('src/components')
+      .readdirSync('src/app/components')
       .indexOf(component.toLowerCase()) >= 0;
 }
 
