@@ -1,0 +1,13 @@
+/* tslint:disable member-ordering */
+import { Injectable } from '@angular/core';
+import { Effect, StateUpdates, toPayload } from '@ngrx/effects';
+import { {{properCase name}}Actions } from '../actions';
+import { {{properCase name}}Service } from '../services';
+
+@Injectable()
+export class {{properCase name}}Effects {
+  constructor(private updates$: StateUpdates<any>,
+              private {{camelCase name}}Actions: {{properCase name}}Actions,
+              private {{camelCase name}}Service: {{properCase name}}Service) {
+  }
+}

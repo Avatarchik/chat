@@ -36,18 +36,44 @@ export function pageExists(entity) {
 
   const routes = fs
     .readdirSync('src/app/routes')
-    .map(f => f.slice(0, -15))
-    .filter(f => f !== 'index.ts');
+    .filter(f => f !== 'index.ts')
+    .map(f => f.slice(0, -15));
 
   return [...modules, ...pages, ...routes]
     .some(fileName => fileName.indexOf(entity.toLowerCase()) >= 0);
 }
 
 export function entityExists(entity) {
-  const actions = fs.readdirSync('src/app/actions');
-  const reducers = fs.readdirSync('src/app/reducers');
-  const selectors = fs.readdirSync('src/app/selectors');
+  const interfaces = fs
+    .readdirSync('src/app/interfaces')
+    .filter(f => f !== 'index.ts')
+    .map(f => f.slice(0, -13));
 
-  return [...actions, ...reducers, ...selectors]
+  const actions = fs
+    .readdirSync('src/app/actions')
+    .filter(f => f !== 'index.ts')
+    .map(f => f.slice(0, -10));
+
+  const reducers = fs
+    .readdirSync('src/app/reducers')
+    .filter(f => f !== 'index.ts')
+    .map(f => f.slice(0, -11));
+
+  const effects = fs
+    .readdirSync('src/app/selectors')
+    .filter(f => f !== 'index.ts')
+    .map(f => f.slice(0, -10));
+
+  const selectors = fs
+    .readdirSync('src/app/selectors')
+    .filter(f => f !== 'index.ts')
+    .map(f => f.slice(0, -12));
+
+  const services = fs
+    .readdirSync('src/app/services')
+    .filter(f => f !== 'index.ts')
+    .map(f => f.slice(0, -11));
+
+  return [...interfaces, ...actions, ...reducers, ...effects, ...selectors, ...services]
     .some(fileName => fileName.indexOf(entity.toLowerCase()) >= 0);
 }
