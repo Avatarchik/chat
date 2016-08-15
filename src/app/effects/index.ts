@@ -1,12 +1,15 @@
 import { DummyEffect } from './dummy.effect';
+import { UserEffects } from './user.effect.ts';
 // $1
 
 export {
-  DummyEffect
-  // $2
+  DummyEffect,
+  UserEffects,
+// $2
 }
 
 export const effects = [
   DummyEffect,
-  // $3
+  UserEffects,
+// $3
 ];

@@ -1,9 +1,12 @@
+import { User } from './user.interface.ts';
 // $1
 
 export {
-  // $2
+  User,
+// $2
 };
 
 export const interfaces = [
-  // $3
+  User,
+// $3
 ];

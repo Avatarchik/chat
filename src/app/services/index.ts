@@ -1,15 +1,18 @@
 import { WebpackNgModuleLoader } from './webpack-module-loader.service';
 import { ConfigService } from './config.service';
+import { UserService } from './user.service';
 // $1
 
 export {
   WebpackNgModuleLoader,
   ConfigService,
-  // $2
+  UserService,
+// $2
 };
 
 export const services = [
   ConfigService,
-  // $3
+  UserService,
+// $3
 ];
 

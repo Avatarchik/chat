@@ -1,9 +1,12 @@
+import { UserActions } from './user.action.ts';
 // $1
 
 export {
-  // $2
+  UserActions,
+// $2
 }
 
 export const actions = [
-  // $3
+  UserActions,
+// $3
 ];

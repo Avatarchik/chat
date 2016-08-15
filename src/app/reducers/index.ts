@@ -1,9 +1,12 @@
+import { userReducer } from './user.reducer.ts';
 // $1
 
 export {
-  // $2
+  userReducer,
+// $2
 };
 
 export const reducers = {
-  // $3
+  users: userReducer,
+// $3
 };

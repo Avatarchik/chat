@@ -1,10 +1,13 @@
+import { UserSelectors } from './user.selector.ts';
 // $1
 
 export {
-  // $2
+  UserSelectors,
+// $2
 };
 
 export const selectors = [
-  // $3
+  UserSelectors,
+// $3
 ];
 

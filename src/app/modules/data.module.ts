@@ -1,5 +1,6 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
-import { ConfigService, /* $1 */ } from '../services';
+import { ConfigService, UserService, /* $1 */ } from '../services';
+import { UserActions, /* $2 */ } from '../actions';
 
 @NgModule({
   exports: []
@@ -10,7 +11,9 @@ export class DataModule {
       ngModule: DataModule,
       providers: [
         ConfigService,
-        // $2
+        UserService,
+        UserActions,
+// $3
       ]
     };
   }
