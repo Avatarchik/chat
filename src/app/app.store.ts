@@ -5,7 +5,6 @@ import { instrumentStore } from '@ngrx/store-devtools';
 import { useLogMonitor } from '@ngrx/store-log-monitor';
 import { storeFreeze } from 'ngrx-store-freeze';
 import { reducers } from './reducers';
-// TODO(tsm): dummy effects
 import { effects } from './effects';
 
 

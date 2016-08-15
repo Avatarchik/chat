@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CoreModule, GUIModule } from '../modules';
 import { HomePage } from '../pages';
 import { homePageRoutes } from '../routes'
 
@@ -7,7 +7,8 @@ import { homePageRoutes } from '../routes'
 @NgModule({
   declarations: [HomePage],
   imports: [
-    CommonModule,
+    CoreModule,
+    GUIModule,
     homePageRoutes
   ]
 })

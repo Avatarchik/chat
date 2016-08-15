@@ -1,13 +1,16 @@
 import 'hammerjs';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { CoreModule, DataModule, GUIModule } from './modules';
+import { CoreModule, GUIModule } from './modules';
 import { StoreLogMonitorComponent } from '@ngrx/store-log-monitor';
 import { AppComponent } from './app.component';
 import { NavbarComponent, SideNavLayoutComponent, SideNavComponent } from './components';
+import { appRoutes, routeProviders } from './app.routes';
 import { storeProviders } from './app.store';
 import { services } from './services';
-import { appRoutes, routeProviders } from './app.routes';
+import { actions } from './actions/index';
+import { selectors } from './selectors/index';
+import { effects } from './effects/index';
 
 @NgModule({
   declarations: [
@@ -20,14 +23,16 @@ import { appRoutes, routeProviders } from './app.routes';
   imports: [
     BrowserModule,
     CoreModule,
-    DataModule.forRoot(),
     GUIModule,
     appRoutes,
   ],
   providers: [
     routeProviders,
     storeProviders,
-    services
+    services,
+    actions,
+    selectors,
+    effects
   ],
   bootstrap: [AppComponent]
 })
