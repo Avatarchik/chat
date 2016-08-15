@@ -6,14 +6,6 @@
 }
 
 .main-container {
+  height: 100%;
   padding: 60px 15px 0;
-}
-
-// if you pass stuff as a template you need to specify styles globally or here
-.navbar-brand {
-  padding: 0;
-
-  .logo {
-    max-width: 38px;
-  }
 }

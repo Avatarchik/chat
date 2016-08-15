@@ -22,6 +22,12 @@ import { Component } from '@angular/core';
         
         <hr class="divider">
         
+        <!-- IF LOGGED IN -->
+        <a [routerLinkActive]="activeCls" routerLink="/auth/logout" class="list-item">
+          <i class="fa fa-fw fa-sign-out"></i>
+          Logout
+        </a>
+        
         <a [routerLinkActive]="activeCls" routerLink="/settings" class="list-item">
           <i class="fa fa-fw fa-cog"></i>
           Settings

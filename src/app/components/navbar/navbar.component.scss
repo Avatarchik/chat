@@ -9,27 +9,11 @@
   padding: 15px 16px;
 }
 
-.bg-inverse .nav-item {
-  &.active a {
-    text-decoration: underline;
-  }
-  a {
-    color: #eceeef;
-  }
+.nav-item a {
+  color: #fff;
 }
 
-.nav-item {
-  @media (max-width: map-get($grid-breakpoints, sm)) {
-    float: none;
-    margin: 0 !important;
-  }
-
-  a {
-    color: #fff;
-
-    &.brand {
-      text-decoration: none;
-    }
-  }
+.fa-sign-in {
+  font-size: 21px;
 }
 

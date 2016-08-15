@@ -11,7 +11,39 @@ const routes/*: Routes*/ = [
         .then(module => compiler.compileModuleAsync(module.HomePageModule));
     }
   },
-  // $1
+  {
+    path: 'auth/login',
+    loadChildren(compiler) {
+      return System
+        .import('./modules/auth/login-page.module')
+        .then(module => compiler.compileModuleAsync(module.LoginPageModule));
+    }
+  },
+  {
+    path: 'auth/signup',
+    loadChildren(compiler) {
+      return System
+        .import('./modules/auth/signup-page.module')
+        .then(module => compiler.compileModuleAsync(module.SignupPageModule));
+    }
+  },
+  {
+    path: 'auth/forgot-password',
+    loadChildren(compiler) {
+      return System
+        .import('./modules/auth/forgot-password-page.module')
+        .then(module => compiler.compileModuleAsync(module.ForgotPasswordPageModule));
+    }
+  },
+  {
+    path: 'auth/reset-password',
+    loadChildren(compiler) {
+      return System
+        .import('./modules/auth/reset-password-page.module')
+        .then(module => compiler.compileModuleAsync(module.ResetPasswordPageModule));
+    }
+  },
+// $1
   {
     path: 'asd',
     loadChildren(compiler) {

@@ -1,6 +1,6 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import {CoreModule} from './core.module'
+import { CoreModule } from './core.module'
 
 @NgModule({
   imports: [
