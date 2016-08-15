@@ -23,7 +23,7 @@ export default {
       default: 'about-page',
       validate(selector) {
         return selector.trim().length
-          ? true
+          ? (selector.trim().endsWith('-page') ? true : 'selector must end with -page')
           : 'The selector is required';
       }
     },
@@ -40,7 +40,7 @@ export default {
       default: 'about',
       validate(path) {
         return path.trim().length
-          ? ('/about'.startsWith('/') ? 'path cannot start with /' : true)
+          ? (path.trim().startsWith('/') ? 'path cannot start with /' : true)
           : 'path is required';
       }
     }
