@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { FormValidator } from '../../../../utils/validator';
+import { _Validator } from '../../../../utils/validator';
 import { UserService } from '../../../services';
 
 @Component({
@@ -8,58 +8,34 @@ import { UserService } from '../../../services';
   template: `
     <div class="row">
       <div class="col-md-8 offset-md-2">
-        <!--
-        <a href="/auth/facebook" class="btn btn-lg btn-primary btn-block">
-          <i class="fa fa-facebook-square"></i>
-          Login with Facebook
-        </a>
         
-        <hr>
+        <form [formGroup]="form" (submit)="onSubmit()">
         
-        <a href="/auth/google" class="btn btn-lg btn-primary btn-block">
-          <i class="fa fa-google-plus"></i>
-          Login with Google
-        </a>
-        
-        <hr>
-        -->
-        
-        <form [formGroup]="form" (ngSubmit)="onSubmit()">
-          <div class="form-group" [ngClass]="{'has-danger': form.controls.email.dirty && form.controls.email.invalid}">
-            <label class="control-label" for="email">Email</label>
-            <input formControlName="email" id="email" class="form-control" type="email">
-            <div *ngIf="form.controls.email.dirty && form.controls.email.invalid">
-              <div *ngIf="form.controls.email.hasError('required')" class="form-control-feedback">Required field.</div>
-              <div *ngIf="form.controls.email.hasError('incorrectMailFormat')" class="form-control-feedback">Invalid email address.</div>
-            </div>
-          </div>
+          <form-group label="Email">
+            <input formControlName="email" class="form-control" type="email">
+          </form-group>
           
-          <div class="form-group" [ngClass]="{'has-danger': form.controls.nick.dirty && form.controls.nick.invalid}">
-            <label class="control-label" for="nick">Nickname</label>
-            <input formControlName="nick" id="nick" class="form-control" type="text">
-            <div *ngIf="form.controls.nick.dirty && form.controls.nick.invalid">
-              <div *ngIf="form.controls.nick.hasError('required')" class="form-control-feedback">Required field.</div>
-              <div *ngIf="form.controls.nick.hasError('minlength')" class="form-control-feedback">Has to be at least {{form.controls.nick.errors.minlength.requiredLength}} characters long.</div>
-            </div>
-          </div>
+          <form-group label="Username">
+            <input formControlName="nick" class="form-control" type="text">
+          </form-group>
           
-          <div class="form-group" [ngClass]="{'has-danger': form.controls.password.dirty && form.controls.password.invalid}">
-            <label class="control-label" for="password">Password</label>
-            <input formControlName="password" id="password" class="form-control" type="password">
-            <div *ngIf="form.controls.password.dirty && form.controls.nick.invalid">
-              <div *ngIf="form.controls.password.hasError('required')" class="form-control-feedback">Required field.</div>
-              <div *ngIf="form.controls.password.hasError('minlength')" class="form-control-feedback">Has to be at least {{form.controls.password.errors.minlength.requiredLength}} characters long.</div>
-            </div>
-          </div>
+          <form-group label="Password">
+            <input formControlName="password" class="form-control" type="text">
+          </form-group>
           
-          
-          <button type="submit" [disabled]="form.invalid || user$?.error" class="btn btn-lg btn-primary btn-block">Signup</button>
+          <button type="submit" [disabled]="!form.valid || submitPending || user$?.error" class="btn btn-lg btn-primary btn-block">
+            Signup
+            <span *ngIf="submitPending"><i class="fa fa-refresh fa-spin fa-fw"></i></span>
+          </button>
         </form>
         
         <hr>
         
+        <p *ngFor="let alert of alerts">
+          <ngb-alert [type]="alert.type" (close)="closeAlert(alert)">{{ alert.message }}</ngb-alert>
+        </p>
+        
         <div>
-          <ngb-alert *ngIf="user$?.error" type="danger">{{user$?.error.message}}</ngb-alert>
           <pre>{{user$ | json}}</pre>
         </div>
         
@@ -79,6 +55,8 @@ import { UserService } from '../../../services';
 export class SignupFormComponent implements OnInit, OnDestroy {
   form: FormGroup;
   user$: any;
+  submitPending = false;
+  alerts = [];
 
   constructor(private fb: FormBuilder, private userService: UserService) {
     // this.user$ = this.userService.getState().subscribe();
@@ -98,19 +76,38 @@ export class SignupFormComponent implements OnInit, OnDestroy {
 
   createForm() {
     this.form = this.fb.group({
-      email: ['attila.egyed.91@gmail.com', [Validators.required, FormValidator.mailFormat]],
-      nick: ['tsm', [Validators.required, Validators.minLength(3)]],
+      email: ['attila.egyed.91@gmail.com', [Validators.required, _Validator.isEmail]],
+      nick: ['tsm', [Validators.required, Validators.minLength(3), Validators.maxLength(5)]],
       password: ['kakas591', [Validators.required, Validators.minLength(3)]]
     })
   }
 
   onSubmit() {
-    console.log('onSubmit');
-    this.userService.signup({
+    const credentials = {
       email: this.form.controls['email'].value,
       username: this.form.controls['nick'].value,
       password: this.form.controls['password'].value
-    });
+    };
+
+    this.submitPending = true;
+
+    this.userService
+      .signup(credentials)
+      .subscribe(
+        res => {
+          this.submitPending = false;
+          this.alerts.push({type: 'success', message: 'Successful signup!'})
+        },
+        err => {
+          this.submitPending = false;
+          this.alerts.push({type: 'danger', message: err.message})
+        }
+      )
+  }
+
+  closeAlert(alert) {
+    const index = this.alerts.indexOf(alert);
+    this.alerts.splice(index, 1);
   }
 
   ngOnDestroy() {

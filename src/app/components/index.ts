@@ -5,6 +5,7 @@ import { LoginFormComponent } from './auth/login-form/login-form.component.ts';
 import { SignupFormComponent } from './auth/signup-form/signup-form.component.ts';
 import { ForgotPasswordFormComponent } from './auth/forgot-password-form/forgot-password-form.component.ts';
 import { ResetPasswordFormComponent } from './auth/reset-password-form/reset-password-form.component.ts';
+import { FormGroupComponent } from './shared/forms/form-group.component';
 // $1
 
 export {
@@ -30,5 +31,6 @@ export const components = [
 ];
 
 export const sharedComponents = [
+  FormGroupComponent
 ];
 
