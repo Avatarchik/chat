@@ -3,10 +3,5 @@ import { User } from './user.interface.ts';
 
 export {
   User,
-// $2
+  // $2
 };
-
-export const interfaces = [
-  User,
-// $3
-];

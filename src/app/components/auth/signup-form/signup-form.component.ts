@@ -1,8 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FormValidator } from '../../../../utils/validator';
-import { Store } from '@ngrx/store';
-import { UserActions } from '../../../actions';
+import { UserService } from '../../../services';
 
 @Component({
   selector: 'signup-form',
@@ -53,10 +52,16 @@ import { UserActions } from '../../../actions';
             </div>
           </div>
           
-          <button type="submit" [disabled]="form.invalid" class="btn btn-lg btn-primary btn-block">Signup</button>
+          
+          <button type="submit" [disabled]="form.invalid || user$?.error" class="btn btn-lg btn-primary btn-block">Signup</button>
         </form>
         
         <hr>
+        
+        <div>
+          <ngb-alert *ngIf="user$?.error" type="danger">{{user$?.error.message}}</ngb-alert>
+          <pre>{{user$ | json}}</pre>
+        </div>
         
         <ul class="list-inline text-center">
           <li>
@@ -73,10 +78,18 @@ import { UserActions } from '../../../actions';
 })
 export class SignupFormComponent implements OnInit, OnDestroy {
   form: FormGroup;
+  user$: any;
 
-  constructor(private fb: FormBuilder,
-              private store: Store<any>,
-              private userActions: UserActions) {
+  constructor(private fb: FormBuilder, private userService: UserService) {
+    // this.user$ = this.userService.getState().subscribe();
+
+    this.userService
+      .getState()
+      .subscribe(res => this.changed(res))
+  }
+
+  changed(res) {
+    console.log(JSON.stringify(res));
   }
 
   ngOnInit() {
@@ -93,11 +106,11 @@ export class SignupFormComponent implements OnInit, OnDestroy {
 
   onSubmit() {
     console.log('onSubmit');
-    this.store.dispatch(this.userActions.signupRequest({
-      email: this.form.controls.email.value,
-      username: this.form.controls.nick.value,
-      password: this.form.controls.password.value
-    }));
+    this.userService.signup({
+      email: this.form.controls['email'].value,
+      username: this.form.controls['nick'].value,
+      password: this.form.controls['password'].value
+    });
   }
 
   ngOnDestroy() {

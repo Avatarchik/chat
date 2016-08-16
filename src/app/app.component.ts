@@ -15,11 +15,8 @@ import '../styles/main.scss';
         <router-outlet></router-outlet>
       </div>
     </sidenav-layout>
-
-    <ngrx-store-log-monitor *ngIf="IS_DEV" toggleCommand="ctrl-t"></ngrx-store-log-monitor>
   `,
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  IS_DEV = IS_DEV;
 }
