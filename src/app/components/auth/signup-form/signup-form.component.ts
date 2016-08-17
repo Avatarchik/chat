@@ -91,14 +91,10 @@ export class SignupFormComponent implements OnInit, OnDestroy {
       .subscribe(
         res => {
           this.submitPending = false;
-          this.userService.state.next({ user: res.user, token: res.token, error: null });
-          localStorage.setItem('token', res.token);
           this.alerts.push({type: 'success', message: 'Successful signup!'})
         },
         err => {
           this.submitPending = false;
-          this.userService.state.next({ user: null, token: null, error: err });
-          localStorage.removeItem('token');
           this.alerts.push({type: 'danger', message: err.message})
         }
       )
