@@ -17,21 +17,13 @@ const initialState = {
 export class UserService {
 
   private url = this.configService.apiUrl + '/users/';
-  private state$ = new BehaviorSubject(initialState);
+  public state = new BehaviorSubject(initialState);
 
   constructor(private http: Http,
               private configService: ConfigService) {
   }
 
-  getState() {
-    return this.state$.asObservable().cache();
-  }
-
-  setState(newState) {
-    this.state$.next(newState)
-  }
-
-  signup(credentials) {
+  createUser(credentials) {
     let body = JSON.stringify(credentials);
     let headers = new Headers({'Content-Type': 'application/json'});
     let options = new RequestOptions({headers: headers});
@@ -39,22 +31,6 @@ export class UserService {
     return this.http
       .post(this.url + 'signup', body, options)
       .map(res => res.json())
-      .catch(res => Observable.throw(res.json()))
-      // .subscribe(
-      //   res => this.setState(Object.assign({}, this.state$.getValue(), {
-      //     user: res.user,
-      //     token: res.token,
-      //     error: null
-      //   })),
-      //
-      //   err => {
-      //     const newState = Object.assign({}, this.state$.getValue(), {
-      //       user: null,
-      //       token: null,
-      //       error: err.json()
-      //     });
-      //     this.state$.next(newState)
-      //   }
-      // )
+      .catch(res => Observable.throw(res.json()));
   }
 }

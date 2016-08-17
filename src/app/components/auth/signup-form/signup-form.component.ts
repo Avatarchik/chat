@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { _Validator } from '../../../../utils/validator';
 import { UserService } from '../../../services';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'signup-form',
@@ -23,7 +24,7 @@ import { UserService } from '../../../services';
             <input formControlName="password" class="form-control" type="text">
           </form-group>
           
-          <button type="submit" [disabled]="!form.valid || submitPending || user$?.error" class="btn btn-lg btn-primary btn-block">
+          <button type="submit" [disabled]="!form.valid || submitPending" class="btn btn-lg btn-primary btn-block">
             Signup
             <span *ngIf="submitPending"><i class="fa fa-refresh fa-spin fa-fw"></i></span>
           </button>
@@ -34,10 +35,6 @@ import { UserService } from '../../../services';
         <p *ngFor="let alert of alerts">
           <ngb-alert [type]="alert.type" (close)="closeAlert(alert)">{{ alert.message }}</ngb-alert>
         </p>
-        
-        <div>
-          <pre>{{user$ | json}}</pre>
-        </div>
         
         <ul class="list-inline text-center">
           <li>
@@ -54,15 +51,13 @@ import { UserService } from '../../../services';
 })
 export class SignupFormComponent implements OnInit, OnDestroy {
   form: FormGroup;
-  user$: any;
   submitPending = false;
   alerts = [];
+  userStateSub: Subscription;
 
   constructor(private fb: FormBuilder, private userService: UserService) {
-    // this.user$ = this.userService.getState().subscribe();
-
-    this.userService
-      .getState()
+    this.userStateSub = this.userService
+      .state
       .subscribe(res => this.changed(res))
   }
 
@@ -92,14 +87,18 @@ export class SignupFormComponent implements OnInit, OnDestroy {
     this.submitPending = true;
 
     this.userService
-      .signup(credentials)
+      .createUser(credentials)
       .subscribe(
         res => {
           this.submitPending = false;
+          this.userService.state.next({ user: res.user, token: res.token, error: null });
+          localStorage.setItem('token', res.token);
           this.alerts.push({type: 'success', message: 'Successful signup!'})
         },
         err => {
           this.submitPending = false;
+          this.userService.state.next({ user: null, token: null, error: err });
+          localStorage.removeItem('token');
           this.alerts.push({type: 'danger', message: err.message})
         }
       )
@@ -112,6 +111,7 @@ export class SignupFormComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.form = null;
+    this.userStateSub.unsubscribe();
   }
 
 }
