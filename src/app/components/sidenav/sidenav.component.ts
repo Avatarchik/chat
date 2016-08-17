@@ -1,4 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { UserService, UserState } from '../../services/user.service';
+import { Observable } from 'rxjs';
+import { SideNavLayoutComponent } from '../sidenav/sidenav-layout.component';
 
 @Component({
   selector: 'sidenav',
@@ -22,8 +25,7 @@ import { Component } from '@angular/core';
         
         <hr class="divider">
         
-        <!-- IF LOGGED IN -->
-        <a [routerLinkActive]="activeCls" routerLink="/auth/logout" class="list-item">
+        <a *ngIf="(userState | async).loggedIn" [routerLinkActive]="activeCls" (click)="logout($event)" class="list-item">
           <i class="fa fa-fw fa-sign-out"></i>
           Logout
         </a>
@@ -43,5 +45,17 @@ import { Component } from '@angular/core';
   styleUrls: ['./sidenav.component.scss']
 })
 export class SideNavComponent {
+  @Input() sidenav: SideNavLayoutComponent;
   activeCls = 'active';
+  userState: Observable<UserState>;
+
+  constructor(private userService: UserService) {
+    this.userState = this.userService.state
+  }
+
+  logout(evt: MouseEvent) {
+    evt.preventDefault();
+    this.userService.logout();
+    this.sidenav.close();
+  }
 }

@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { _Validator } from '../../../../utils/validator';
 import { UserService } from '../../../services';
-import { Subscription } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'signup-form',
@@ -53,16 +53,10 @@ export class SignupFormComponent implements OnInit, OnDestroy {
   form: FormGroup;
   submitPending = false;
   alerts = [];
-  userStateSub: Subscription;
 
-  constructor(private fb: FormBuilder, private userService: UserService) {
-    this.userStateSub = this.userService
-      .state
-      .subscribe(res => this.changed(res))
-  }
-
-  changed(res) {
-    console.log(JSON.stringify(res));
+  constructor(private fb: FormBuilder,
+              private userService: UserService,
+              private router: Router) {
   }
 
   ngOnInit() {
@@ -72,7 +66,7 @@ export class SignupFormComponent implements OnInit, OnDestroy {
   createForm() {
     this.form = this.fb.group({
       email: ['attila.egyed.91@gmail.com', [Validators.required, _Validator.isEmail]],
-      nick: ['tsm', [Validators.required, Validators.minLength(3), Validators.maxLength(5)]],
+      nick: ['tsm', [Validators.required, Validators.minLength(3)]],
       password: ['kakas591', [Validators.required, Validators.minLength(3)]]
     })
   }
@@ -91,7 +85,8 @@ export class SignupFormComponent implements OnInit, OnDestroy {
       .subscribe(
         res => {
           this.submitPending = false;
-          this.alerts.push({type: 'success', message: 'Successful signup!'})
+          // this.alerts.push({type: 'success', message: 'Successful signup!'})
+          this.router.navigate(['']);
         },
         err => {
           this.submitPending = false;
@@ -107,7 +102,6 @@ export class SignupFormComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.form = null;
-    this.userStateSub.unsubscribe();
   }
 
 }

@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CoreModule } from '../';
+import { CoreModule, GUIModule } from '../';
 import { LoginPage } from '../../pages';
 import { loginPageRoutes } from '../../routes'
 import { LoginFormComponent } from '../../components';
@@ -11,6 +11,7 @@ import { LoginFormComponent } from '../../components';
   ],
   imports: [
     CoreModule,
+    GUIModule,
     loginPageRoutes
   ]
 })

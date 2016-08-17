@@ -7,7 +7,7 @@ import '../styles/main.scss';
   template: `
     <sidenav-layout #sidenav>
       
-      <sidenav></sidenav>
+      <sidenav [sidenav]="sidenav"></sidenav>
     
       <navbar class="pos-f-t" [sidenav]="sidenav"></navbar>
       

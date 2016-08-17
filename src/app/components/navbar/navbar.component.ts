@@ -1,5 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { SideNavLayoutComponent } from '../sidenav/sidenav-layout.component';
+import { UserService, UserState } from '../../services/user.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'navbar',
@@ -13,8 +15,8 @@ import { SideNavLayoutComponent } from '../sidenav/sidenav-layout.component';
           <a routerLink="/" class="brand">Chat</a>
         </li>
       </ul>
-      <!-- IF LOGGED OUT -->
-      <ul class="nav navbar-nav pull-right">
+
+      <ul *ngIf="!(userState | async).loggedIn" class="nav navbar-nav pull-right">
         <li class="nav-item">
           <a routerLink="auth/login"><i class="fa fa-sign-in"></i></a>
         </li>
@@ -25,4 +27,9 @@ import { SideNavLayoutComponent } from '../sidenav/sidenav-layout.component';
 })
 export class NavbarComponent {
   @Input() sidenav: SideNavLayoutComponent;
+  userState: Observable<UserState>;
+
+  constructor(private userService: UserService) {
+    this.userState = this.userService.state
+  }
 }
